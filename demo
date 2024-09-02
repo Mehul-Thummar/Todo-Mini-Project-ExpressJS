@@ -1,0 +1,59 @@
+<ul>
+  <!-- <% todos.forEach(todo=> { %> -->
+    <li>
+        <form action="/todos/complete/<%= todo._id %>" method="post" style="display: inline;">
+            <button type="submit">
+                <%= todo.completed ? 'Undo' : 'Complete' %>
+            </button>
+        </form>
+        <form action="/todos/edit/<%= todo._id %>" method="post" style="display: inline;">
+            <input type="text" name="text" value="<%= todo.text %>" required>
+            <button type="submit">Edit</button>
+        </form>
+        <form action="/todos/delete/<%= todo._id %>" method="post" style="display: inline;">
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+    <% }); %>
+</ul>
+
+
+
+
+
+
+exports.registerUser = async (req, res) => {
+  try {
+    let user = await User.findOne({ email: req.body.email, isDelete: false });
+    if (user) {
+      return res.json({ message: "User already exists..." });
+    }
+    let hashpassword = await bcrypt.hash(req.body.password, 10); // Ensure this is correct
+    user = await User.create({ ...req.body, password: hashpassword });
+    return res.render('success', { user });
+  } catch (error) {
+    console.log(error);
+    res.json({ message: "Internal server error..." });
+  }
+};
+
+
+app.post('/api/v1/users/change-password', authenticate, async (req, res) => {
+  const { current_password, new_password } = req.body;
+  const username = req.user.username;
+
+  if (!current_password || !new_password) {
+    return res.status(400).json({ error: 'Current and new password are required' });
+  }
+
+  const user = users[username];
+  if (!user) return res.status(404).json({ error: 'User not found' });
+
+  const isMatch = await bcrypt.compare(current_password, user.password);
+  if (!isMatch) return res.status(400).json({ error: 'Current password is incorrect' });
+
+  const hashedNewPassword = await bcrypt.hash(new_password, 10);
+  user.password = hashedNewPassword;
+
+  res.status(200).json({ message: 'Password changed successfully.' });
+});

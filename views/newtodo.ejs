@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "poppins";
+            background: var(--background);
+            color: var(--color);
+            letter-spacing: 1px;
+            transition: background 0.2s ease;
+            -webkit-transition: background 0.2s ease;
+            -moz-transition: background 0.2s ease;
+            -ms-transition: background 0.2s ease;
+            -o-transition: background 0.2s ease;
+        }
+
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #472dbb;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #4565a0;
+        }
+
+        p {
+            margin-top: 15px;
+        }
+
+        :root {
+            --background: #1a1a2e;
+            --color: #ffffff;
+            --primary-color: #0f3460;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            border: 1px solid hsla(0, 0%, 65%, 0.158);
+            box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(20px);
+            z-index: 99;
+            padding: 2rem;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+        }
+
+        .circle {
+            width: 8rem;
+            height: 8rem;
+            background: var(--primary-color);
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            position: absolute;
+        }
+
+
+        .circle-one {
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transform: translate(-45%, -45%);
+            -webkit-transform: translate(-45%, -45%);
+            -moz-transform: translate(-45%, -45%);
+            -ms-transform: translate(-45%, -45%);
+            -o-transform: translate(-45%, -45%);
+        }
+
+        .circle-two {
+            bottom: 0;
+            right: 0;
+            z-index: -1;
+            transform: translate(45%, 45%);
+            -webkit-transform: translate(45%, 45%);
+            -moz-transform: translate(45%, 45%);
+            -ms-transform: translate(45%, 45%);
+            -o-transform: translate(45%, 45%);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="form-container">
+        <div class="circle circle-one"></div>
+        <h2>Todo</h2>
+        <form action="/todo/newtodo" method="post" id="add-form" >
+            <div class="form-group">
+                <label for="todo">Task:</label>
+                <input type="text" id="todo" name="task" placeholder="Enter your Task" required autocomplete="off">
+            </div>
+            <button type="submit" name="submit" class="submit-btn">Add To List</button>
+            <div class="circle circle-two"></div>
+        </form>
+
+    </div>
+    <div class="theme-btn-container"></div>
+</body>
+
+</html>
